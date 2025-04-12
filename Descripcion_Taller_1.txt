@@ -1,0 +1,111 @@
+-----------------------------------Análisis y Descripción del dataset---------------------------------------
+____________________________________________________________________________________________________________
+El conjunto de datos Online Retail recoge información sobre transacciones de ventas realizadas entre 
+diciembre de 2010 y diciembre de 2011, con un total de 541,909 registros. Las variables clave incluidas son:
+ -InvoiceNo: código de factura; los valores que comienzan con la letra 'C' indican cancelaciones.
+ -StockCode: código de producto de cinco dígitos.
+ -Quantity: cantidad de productos comprados; los valores negativos representan devoluciones.
+ -UnitPrice: precio unitario del producto, expresado en libras esterlinas (£).
+ -CustomerID: identificador único del cliente.
+ -Country: país desde el cual se realizó la compra.
+
+El conjunto de datos inicial contenía 536,641 registros, de los cuales 5,268 estaban duplicados, 
+dejando un total de 531,373 registros únicos para el análisis.
+
+===========================================================
+             RESULTADOS DEL EDA          
+===========================================================
+
+DISTRIBUCIÓN TEMPORAL----------------------------------
+Transacciones por año:
+2011    494660
+2010     41981
+
+Total años registrados: 2 (2010-2011)
+
+DISTRIBUCIÓN GEOGRÁFICA--------------------------------
+Países únicos: 38
+
+Top 10 países con más transacciones:
+United Kingdom    490300
+Germany             9480
+France              8541
+EIRE                8184
+Spain               2528
+Netherlands         2371
+Belgium             2069
+Switzerland         1994
+Portugal            1510
+Australia           1258
+
+ANÁLISIS DE PRECIOS------------------------------------
+Registros con precio cero: 2510
+Registros con precio negativo: 2
+Puede ser debido a cancelaciones o errores del sistema
+
+ANÁLISIS DE CANTIDADES---------------------------------
+Registros con cantidad negativa: 10587
+
+ANÁLISIS DE CANCELACIONES------------------------------
+Facturas canceladas (empiezan con 'C'): 9251
+De ellas con cantidad negativa: 9251
+Las cancelaciones generan devoluciones
+
+ANÁLISIS DE DESCRIPCIONES------------------------------
+Descripciones que comienzan con caracteres especiales: 70
+
+============================================================
+            MUESTRAS DE REGISTROS PROBLEMÁTICOS             
+============================================================
+
+[Ejemplo 1] Precios negativos:
+       InvoiceNo StockCode      Description  UnitPrice
+297646   A563186         B  Adjust bad debt  -11062.06
+297647   A563187         B  Adjust bad debt  -11062.06
+
+[Ejemplo 2] Cancelaciones típicas:
+    InvoiceNo CustomerID  Quantity  UnitPrice
+141   C536379      14527        -1      27.50
+154   C536383      15311        -1       4.65
+235   C536391      17548       -12       1.65
+
+Para la metadata:
+
+La combinación de StockCode y Description permite un análisis detallado del catálogo 
+de productos, identificando no solo los artículos más vendidos (Quantity), sino 
+también aquellos con descripciones ambiguas que podrían afectar la experiencia de compra. 
+Al combinar Country con UnitPrice, se pueden detectar estrategias de precios diferenciados
+ por mercado y su impacto en el volumen de ventas. La variable InvoiceNo, junto con 
+InvoiceDate, posibilita el cálculo de la frecuencia de compra por cliente (CustomerID), 
+permitiendo identificar patrones de recompra.para este conjunto de datos:
+
+=================================================================
+METADATA DEL DATASET: Online Retail
+================================================================
+Descripción:    Conjunto de datos de transacciones de una tienda 
+                en línea en el Reino Unido durante 2010-2011.
+Fuente:         UCI Machine Learning Repository
+Fecha creación: 2011-12-09
+País principal: United Kingdom
+Moneda:         GBP
+
+------------------------------------------------------------------
+CAMPOS DEL DATASET
+------------------------------------------------------------------
+Nombre          Tipo        Descripción
+------------------------------------------------------------------
+InvoiceNo       string      Número de factura. Si comienza con 'C'  
+                            indica una cancelación.
+StockCode       string      Código único del producto.
+Description     string      Descripción del producto comprado.
+Quantity        integer     Cantidad de unidades vendidas.  
+                            Valores negativos indican devoluciones.
+InvoiceDate     datetime    Fecha y hora de la transacción. 
+                            Fecha mínima: 2010-12-01 08:26:00
+                            Fecha máxima: 2011-12-09 12:50:00
+UnitPrice       float       Precio por unidad del producto 
+                            (en libras esterlinas).
+CustomerID      integer     Identificador único del cliente.  
+                            Puede estar ausente en algunos registros.
+Country         string      País del cliente (38 países).
+==================================================================
