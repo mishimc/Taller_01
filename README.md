@@ -53,6 +53,19 @@ Un análisis general del conjunto de datos:
 ## Meta-data
 La combinación de StockCode y Description permite un análisis detallado del catálogo de productos, identificando no solo los artículos más vendidos (Quantity), sino también aquellos con descripciones ambiguas que podrían afectar la experiencia de compra. Al combinar Country con UnitPrice, se pueden detectar estrategias de precios diferenciados por mercado y su impacto en el volumen de ventas. La variable InvoiceNo, junto con InvoiceDate, posibilita el cálculo de la frecuencia de compra por cliente (CustomerID), permitiendo identificar patrones de recompra. 
 
+### 📊 Campos del Dataset
+
+| **Nombre**     | **Tipo**    | **Descripción**                                                                 |
+|----------------|-------------|----------------------------------------------------------------------------------|
+| `InvoiceNo`    | `string`    | Número de factura. Si comienza con `'C'` indica una cancelación.                |
+| `StockCode`    | `string`    | Código único del producto.                                                      |
+| `Description`  | `string`    | Descripción del producto comprado.                                              |
+| `Quantity`     | `integer`   | Cantidad de unidades vendidas. Valores negativos indican devoluciones.          |
+| `InvoiceDate`  | `datetime`  | Fecha y hora de la transacción. <br> Mínima: `2010-12-01 08:26:00` <br> Máxima: `2011-12-09 12:50:00` |
+| `UnitPrice`    | `float`     | Precio por unidad del producto (en libras esterlinas).                          |
+| `CustomerID`   | `integer`   | Identificador único del cliente.      |
+| `Country`      | `string`    | País del cliente (38 países).                                                   |
+
 ## Visualizaciones
 A continuación se presentan visualizaciones para mayor información.
 Se observa una correlación prácticamente nula (≈ 0) entre la cantidad comprada (`Quantity`) y el precio unitario (`UnitPrice`), lo que indica que no existe una relación lineal significativa entre estas variables. Este hallazgo sugiere que:  
